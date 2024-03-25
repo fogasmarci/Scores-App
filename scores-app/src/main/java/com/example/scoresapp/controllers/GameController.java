@@ -2,6 +2,7 @@ package com.example.scoresapp.controllers;
 
 import com.example.scoresapp.dtos.NewGameDTO;
 import com.example.scoresapp.dtos.ScoreDTO;
+import com.example.scoresapp.exceptions.TeamMismatchException;
 import com.example.scoresapp.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +22,7 @@ import java.util.NoSuchElementException;
   @PostMapping("/api/games")
   public ResponseEntity<?> createGame(@RequestBody NewGameDTO newGameDTO) {
     try {
-      gameService.createGame(newGameDTO);
-      return ResponseEntity.status(200).build();
+      return ResponseEntity.status(200).body(gameService.createGame(newGameDTO));
     } catch (NoSuchElementException e){
       return ResponseEntity.status(400).body(e.getMessage());
     }
@@ -33,7 +33,7 @@ import java.util.NoSuchElementException;
     try {
       gameService.playGame(gameId, scoreDTO);
       return ResponseEntity.status(200).build();
-    } catch (NoSuchElementException e){
+    } catch (TeamMismatchException e){
       return ResponseEntity.status(400).body(e.getMessage());
     }
   }

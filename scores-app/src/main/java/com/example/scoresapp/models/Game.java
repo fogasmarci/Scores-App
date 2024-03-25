@@ -3,45 +3,56 @@ package com.example.scoresapp.models;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "games")
 public class Game {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private String score;
+  private String name;
+  @Column(name = "home_team_score")
+  private Integer homeTeamScore;
+  @Column(name = "away_team_score")
+  private Integer awayTeamScore;
+  private int round;
   @Column(name = "game_status")
   private GameStatus gameStatus;
   @Column(name = "start_time")
   private LocalDateTime startTime;
-  @ManyToOne
+  @ManyToOne (fetch = FetchType.EAGER)
   @JoinColumn (name = "competition_id")
   private Competition competition;
-  @ManyToOne
-  @Column(name = "home_team")
-  private Team homeTeam;
-  private int homeTeamScore;
-  @ManyToOne
-  @Column(name = "away_team")
-  private Team awayTeam;
-  private int awayTeamScore;
-  private int round;
+  @ManyToMany (fetch = FetchType.EAGER)
+  @JoinTable(
+      name = "game_team",
+      joinColumns = @JoinColumn(name = "game_id"),
+      inverseJoinColumns = @JoinColumn(name = "team_id"))
+  private List<Team> teams;
+  @OneToOne
+  @JoinColumn (name = "game_details_id")
+  private GameDetails gameDetails;
 
   public Game() {
     gameStatus = GameStatus.Not_started;
   }
 
-  public Game (Competition competition, Team homeTeam, Team awayTeam, LocalDateTime startTime) {
+  public Game (String name, Competition competition, int round, List<Team> teams, LocalDateTime startTime) {
     this();
+    this.name = name;
     this.competition = competition;
-    this.homeTeam = homeTeam;
-    this.awayTeam = awayTeam;
+    this.round = round;
+    this.teams = teams;
     this.startTime = startTime;
   }
 
-  public void setGameStatusToFinished(){
+  public void finishGame(){
     this.gameStatus = GameStatus.Finished;
+    teams.get(0).addToPlayedGames(this);
+    teams.get(1).addToPlayedGames(this);
+    competition.addToPlayedGames(this);
   }
 
   public GameStatus getGameStatus() {
@@ -64,24 +75,8 @@ public class Game {
     return competition;
   }
 
-  public String getScore() {
-    return score;
-  }
-
-  public void setScore(String score) {
-    this.score = score;
-  }
-
   public void setCompetition(Competition competition) {
     this.competition = competition;
-  }
-
-  public Team getHomeTeam() {
-    return homeTeam;
-  }
-
-  public void setHomeTeam(Team homeTeam) {
-    this.homeTeam = homeTeam;
   }
 
   public int getHomeTeamScore() {
@@ -90,14 +85,6 @@ public class Game {
 
   public void setHomeTeamScore(int homeTeamScore) {
     this.homeTeamScore = homeTeamScore;
-  }
-
-  public Team getAwayTeam() {
-    return awayTeam;
-  }
-
-  public void setAwayTeam(Team awayTeam) {
-    this.awayTeam = awayTeam;
   }
 
   public int getAwayTeamScore() {
@@ -118,5 +105,25 @@ public class Game {
 
   public Long getId() {
     return id;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public List<Team> getTeams() {
+    return teams;
+  }
+
+  public GameDetails getGameDetails() {
+    return gameDetails;
+  }
+
+  public void setGameDetails(GameDetails gameDetails) {
+    this.gameDetails = gameDetails;
   }
 }

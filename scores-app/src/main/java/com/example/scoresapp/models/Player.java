@@ -18,6 +18,7 @@ public class Player {
   private int yellowCards;
   private String nationality;
   @ManyToOne
+  @JoinColumn (name = "team_id")
   private Team team;
 
 }

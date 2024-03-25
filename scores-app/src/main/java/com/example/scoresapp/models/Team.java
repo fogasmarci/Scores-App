@@ -10,23 +10,25 @@ import java.util.Set;
 public class Team {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "team_id")
   private Long id;
   private String name;
+  private String stadium;
   @ManyToMany
   @JoinTable (
       name = "team_competition",
       joinColumns = @JoinColumn(name = "team_id"),
       inverseJoinColumns = @JoinColumn(name = "competition_id"))
   private Set<Competition> competitions;
-  @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+  @ManyToMany (fetch = FetchType.EAGER, mappedBy = "teams", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
   @Column(name = "games_to_play")
   private List<Game> gamesToPlay;
-  @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
+  @ManyToMany (fetch = FetchType.EAGER, mappedBy = "teams", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
   @Column(name = "played_games")
   private List<Game> playedGames;
   @OneToMany (mappedBy = "team", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
   private Set<Player> players;
-  private String stadium;
+
 
   public Team() {
   }
