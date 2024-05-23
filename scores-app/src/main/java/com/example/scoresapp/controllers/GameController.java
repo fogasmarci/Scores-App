@@ -2,6 +2,7 @@ package com.example.scoresapp.controllers;
 
 import com.example.scoresapp.dtos.NewGameDTO;
 import com.example.scoresapp.dtos.ScoreDTO;
+import com.example.scoresapp.dtos.TeamNameDTO;
 import com.example.scoresapp.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

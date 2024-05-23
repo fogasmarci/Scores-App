@@ -1,6 +1,7 @@
 package com.example.scoresapp.models;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,16 +15,13 @@ public class Competition {
   @Column(name = "competition_id")
   private Long id;
   private String name;
-  @OneToMany (mappedBy = "competition", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-  private List<Game> gamesToPlay;
-  @OneToMany (mappedBy = "competition", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-  private List<Game> playedGames;
+  @OneToMany (mappedBy = "competition", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+  private List<Game> games;
   @ManyToMany(mappedBy = "competitions")
   private Set<Team> teams;
 
   public Competition() {
-    gamesToPlay = new ArrayList<>();
-    playedGames = new ArrayList<>();
+    games = new ArrayList<>();
   }
 
   public Competition(Set<Team> teams, String name) {
@@ -55,20 +53,11 @@ public class Competition {
     this.name = name;
   }
 
-  public List<Game> getGamesToPlay() {
-    return gamesToPlay;
+  public List<Game> getGames() {
+    return games;
   }
 
-  public void addGameToPlay(Game game) {
-    gamesToPlay.add(game);
-  }
-
-  public List<Game> getPlayedGames() {
-    return playedGames;
-  }
-
-  public void addToPlayedGames(Game game) {
-    gamesToPlay.remove(game);
-    playedGames.add(game);
+  public void addGame(Game game) {
+    games.add(game);
   }
 }

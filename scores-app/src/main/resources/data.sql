@@ -3,15 +3,11 @@ VALUES ('La Liga'),
        ('Premier League'),
        ('Champions League');
 
-INSERT INTO teams (name, stadium, games_to_play_id, played_games_id)
-VALUES ('Barcelona', 'Nou Camp', null, 1),
-       ('Barcelona', 'Nou Camp', 2, null),
-       ('Barcelona', 'Nou Camp', 4, null),
-       ('Real Madrid', 'Bernabeu', null, 1),
-       ('Real Madrid', 'Bernabeu', 3, null),
-       ('Valencia', 'Mestalla', 2, null),
-       ('Valencia', 'Mestalla', 3, null,
-       ('Liverpool', 'Anfield', 4, null);
+INSERT INTO teams (name, stadium)
+VALUES ('Barcelona', 'Nou Camp'),
+       ('Real Madrid', 'Bernabeu'),
+       ('Valencia', 'Mestalla'),
+       ('Liverpool', 'Anfield');
 
 INSERT INTO team_competition (team_id, competition_id)
 VALUES (1, 1),
@@ -21,22 +17,21 @@ VALUES (1, 1),
        (4, 3),
        (1, 3);
 
-INSERT INTO games (score, game_status, start_time, competition_id, home_team_id, away_team_id)
-VALUES ('5-1', 2, '2024-01-01', 1, 1, 4),
-       (NULL, 0, '2024-05-05', 1),
-       (NULL, 0, '2024-05-05', 1),
-       (NULL, 0, '2024-05-05', 3);
+INSERT INTO games (name, home_team, home_team_score, away_team, away_team_score, round, game_status, start_time, competition_id)
+VALUES ('Barcelona vs Real Madrid', 'Barcelona', 5, 'Real Madrid', 1, 1, 2, '2024-01-01', 1),
+       ('Barcelona vs Valencia', 'Barcelona',  NULL, 'Valencia', NULL, 2, 0, '2024-05-05', 1),
+       ('Real Madrid vs Valencia', 'Real Madrid', NULL, 'Valencia', NULL, 3, 0, '2024-05-05', 1),
+       ('Barcelona vs Liverpool', 'Barcelona', NULL, 'Liverpool', NULL, 1, 0, '2024-05-05', 3);
 
+DROP TABLE team_game;
 
-/*INSERT INTO game_team (game_id, team_id)
-VALUES (1, 1),
-       (1, 2),
-       (2, 1),
-       (2, 3),
-       (3, 2),
-       (3, 3),
-       (4, 1),
-       (4, 4);*/
+CREATE TABLE team_game (home_team_id bigint, away_team_id bigint, game_id bigint, id bigint not null auto_increment, primary key (id));
+
+INSERT INTO team_game (home_team_id, away_team_id, game_id)
+VALUES (1, 2, 1),
+       (1, 3, 2),
+       (2, 3, 3),
+       (1, 4, 4);
 
 INSERT INTO players (name, suspended, yellow_cards, nationality, team_id)
 VALUES ('Szoboszlai Dominik', FALSE, 3, 'Hungarian', 4),

@@ -1,6 +1,7 @@
 package com.example.scoresapp.models;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 
 import java.util.List;
 import java.util.Set;
@@ -18,12 +19,6 @@ public class Team {
       joinColumns = @JoinColumn(name = "team_id"),
       inverseJoinColumns = @JoinColumn(name = "competition_id"))
   private Set<Competition> competitions;
-  @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-  @Column(name = "games_to_play")
-  private List<Game> gamesToPlay;
-  @OneToMany (cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
-  @Column(name = "played_games")
-  private List<Game> playedGames;
   @OneToMany (mappedBy = "team", cascade = {CascadeType.PERSIST, CascadeType.REFRESH})
   private Set<Player> players;
   private String stadium;
@@ -55,22 +50,6 @@ public class Team {
     this.name = name;
   }
 
-  public List<Game> getGamesToPlay() {
-    return gamesToPlay;
-  }
-
-  public void addGameToPlay(Game game) {
-    gamesToPlay.add(game);
-  }
-
-  public List<Game> getPlayedGames() {
-    return playedGames;
-  }
-
-  public void addToPlayedGames(Game game) {
-    gamesToPlay.remove(game);
-    playedGames.add(game);
-  }
 
   public Set<Player> getPlayers() {
     return players;

@@ -1,6 +1,7 @@
 package com.example.scoresapp.models;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 
 import java.time.Duration;
 
