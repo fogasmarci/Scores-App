@@ -3,9 +3,7 @@ package com.example.scoresapp.models;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "competitions")
@@ -19,9 +17,12 @@ public class Competition {
   private List<Game> games;
   @ManyToMany(mappedBy = "competitions")
   private Set<Team> teams;
+  @OneToMany (mappedBy = "competition", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private List<TeamStats> table;
 
   public Competition() {
     games = new ArrayList<>();
+    table = new ArrayList<>();
   }
 
   public Competition(Set<Team> teams, String name) {
@@ -59,5 +60,9 @@ public class Competition {
 
   public void addGame(Game game) {
     games.add(game);
+  }
+
+  public List<TeamStats> getTable() {
+    return table;
   }
 }

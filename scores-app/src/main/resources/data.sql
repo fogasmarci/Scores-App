@@ -3,6 +3,11 @@ VALUES ('La Liga'),
        ('Premier League'),
        ('Champions League');
 
+INSERT INTO team_stats (team_rank, team_name, games_played, wins, draws, losses, goal_difference, points, competition_id)
+VALUES (1, 'Barcelona', 1, 1, 0, 0, 5, 3, 1),
+       (2, 'Real Madrid', 1, 0, 0, 1, -5, 0, 1),
+       (3, 'Valencia', 0, 0, 0, 0, 0, 0, 1);
+
 INSERT INTO teams (name, stadium)
 VALUES ('Barcelona', 'Nou Camp'),
        ('Real Madrid', 'Bernabeu'),

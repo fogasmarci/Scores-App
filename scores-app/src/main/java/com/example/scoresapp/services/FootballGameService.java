@@ -3,10 +3,7 @@ package com.example.scoresapp.services;
 import com.example.scoresapp.dtos.NewGameDTO;
 import com.example.scoresapp.dtos.ScoreDTO;
 import com.example.scoresapp.dtos.TeamNameDTO;
-import com.example.scoresapp.models.Competition;
-import com.example.scoresapp.models.Game;
-import com.example.scoresapp.models.Team;
-import com.example.scoresapp.models.TeamGame;
+import com.example.scoresapp.models.*;
 import com.example.scoresapp.repositories.CompetitionRepository;
 import com.example.scoresapp.repositories.GameRepository;
 import com.example.scoresapp.repositories.TeamGameRepository;
@@ -15,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -23,13 +21,16 @@ public class FootballGameService implements GameService{
   private CompetitionRepository competitionRepository;
   private TeamRepository teamRepository;
   private TeamGameRepository teamGameRepository;
+  private FootballTeamStatsService footballTeamStatsService;
 
   @Autowired
-  public FootballGameService(GameRepository gameRepository, CompetitionRepository competitionRepository, TeamRepository teamRepository, TeamGameRepository teamGameRepository) {
+  public FootballGameService(GameRepository gameRepository, CompetitionRepository competitionRepository, TeamRepository teamRepository,
+                             TeamGameRepository teamGameRepository, FootballTeamStatsService footballTeamStatsService) {
     this.gameRepository = gameRepository;
     this.competitionRepository = competitionRepository;
     this.teamRepository = teamRepository;
     this.teamGameRepository = teamGameRepository;
+    this.footballTeamStatsService = footballTeamStatsService;
   }
 
   @Override
@@ -41,6 +42,8 @@ public class FootballGameService implements GameService{
   public void playGame(Long gameId, ScoreDTO scoreDTO){
     Game game = gameRepository.findById(gameId).orElseThrow(() -> new NoSuchElementException("Game with ID " + gameId + " not found"));
     game.finishGame(scoreDTO);
+    List<TeamStats> table = game.getCompetition().getTable();
+    footballTeamStatsService.updateTable(scoreDTO,table);
     gameRepository.save(game);
   }
 

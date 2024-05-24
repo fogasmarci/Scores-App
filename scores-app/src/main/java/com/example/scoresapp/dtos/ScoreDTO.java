@@ -1,4 +1,4 @@
 package com.example.scoresapp.dtos;
 
-public record ScoreDTO(Integer homeTeamScore, Integer awayTeamScore){
+public record ScoreDTO(String homeTeamName, Integer homeTeamScore, String awayTeamName, Integer awayTeamScore){
 }
