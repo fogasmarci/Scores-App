@@ -1,41 +1,31 @@
 package com.example.scoresapp.controllers;
 
-import com.example.scoresapp.dtos.NewGameDTO;
-import com.example.scoresapp.dtos.ScoreDTO;
-import com.example.scoresapp.dtos.TeamNameDTO;
+import com.example.scoresapp.dtos.GameDTO;
 import com.example.scoresapp.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.NoSuchElementException;
+@Controller
+public class GameController {
+    private final GameService gameService;
 
-@RestController
-  public class GameController {
-  private final GameService gameService;
-
-  @Autowired
-  public GameController(GameService gameService) {
-    this.gameService = gameService;
-  }
-
-  @PostMapping("/api/games")
-  public ResponseEntity<?> createGame(@RequestBody NewGameDTO newGameDTO) {
-    try {
-      gameService.createGame(newGameDTO);
-      return ResponseEntity.status(200).build();
-    } catch (NoSuchElementException e){
-      return ResponseEntity.status(400).body(e.getMessage());
+    @Autowired
+    public GameController(GameService gameService) {
+        this.gameService = gameService;
     }
-  }
 
-  @PatchMapping("/api/games/{gameId}")
-  public ResponseEntity<?> playGame(@PathVariable Long gameId, @RequestBody ScoreDTO scoreDTO) {
-    try {
-      gameService.playGame(gameId, scoreDTO);
-      return ResponseEntity.status(200).build();
-    } catch (NoSuchElementException e){
-      return ResponseEntity.status(400).body(e.getMessage());
+    @GetMapping("/")
+    public String displayAllGames(Model model) {
+        model.addAttribute("games", gameService.listAllGames());
+        return "home";
     }
-  }
+
+    @GetMapping("/game/{gameId}")
+    public String displayAllGames(@PathVariable Long gameId, Model model) {
+        model.addAttribute("gameDTO", gameService.findGameById(gameId));
+        return "game";
+    }
 }

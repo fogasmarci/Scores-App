@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/game.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Details</title>
+</head>
+<body>
+<div class="container">
+    <h1>Game Details</h1>
+    <div class="game-details">
+        <p><strong>Start Time:</strong> <span th:text="${gameDTO.startTime}"></span></p>
+        <p><strong>Competition:</strong> <span th:text="${gameDTO.competitionName}"></span></p>
+        <p><strong>Home Team:</strong> <span th:text="${gameDTO.homeTeamName}"></span></p>
+        <p><strong>Home Team Score:</strong> <span th:text="${gameDTO.homeTeamScore}"></span></p>
+        <p><strong>Away Team:</strong> <span th:text="${gameDTO.awayTeamName}"></span></p>
+        <p><strong>Away Team Score:</strong> <span th:text="${gameDTO.awayTeamScore}"></span></p>
+    </div>
+</div>
+</body>
+</html>

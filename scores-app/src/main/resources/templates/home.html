@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Welcome to Scores</title>
+    <script src="/js/main.js" defer></script>
+</head>
+<body>
+<h1>Games</h1>
+<div>
+    <table>
+        <tbody id="gamesTableData">
+        <tr th:each="game : ${games.gameDTO}" th:data-game-id="${game.id}">
+            <td th:text="${game.competitionName}"></td>
+            <td th:text="${game.startTime}"></td>
+            <td>
+                <div th:text="${game.homeTeamName}"></div>
+                <div th:text="${game.awayTeamName}"></div>
+            </td>
+            <td>
+                <div>
+                    <div th:text="${game.homeTeamScore}"></div>
+                    <div th:text="${game.awayTeamScore}"></div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

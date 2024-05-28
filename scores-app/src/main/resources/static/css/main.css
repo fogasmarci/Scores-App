@@ -1,0 +1,43 @@
+/* Table styles */
+table {
+    width: 50%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+h1 {
+    width: 50%;
+    border-collapse: collapse;
+    margin: 30px auto;
+}
+
+tbody td {
+    padding: 8px;
+    text-align: center;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Hover effect */
+tbody tr:hover {
+    background-color: #cce5ff;
+}
+
+/* Borders */
+th, td {
+    border: 1px solid #ddd;
+}
+
+/* Ensure the home and away team names are displayed in one column */
+td:nth-child(3),
+td:nth-child(4) {
+    white-space: nowrap;
+}
+
+/* Ensure the home and away team scores are displayed in one column */
+td:nth-child(5),
+td:nth-child(6) {
+    white-space: nowrap;
+}

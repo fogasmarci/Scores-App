@@ -1,11 +1,17 @@
 package com.example.scoresapp.services;
 
-import com.example.scoresapp.dtos.NewGameDTO;
-import com.example.scoresapp.dtos.ScoreDTO;
-import com.example.scoresapp.dtos.TeamNameDTO;
+import com.example.scoresapp.dtos.*;
+
+import java.util.List;
 
 public interface GameService {
-  public void listAllGames(TeamNameDTO teamNameDTO);
+
+  public GameDTOList listAllGames();
+
+  public GameDTO findGameById(Long id);
+
+  public void listAllGamesForGivenTeam(TeamNameDTO teamNameDTO);
+
   public void playGame(Long gameId, ScoreDTO scoreDTO);
 
   public void createGame(NewGameDTO newGameDTO);

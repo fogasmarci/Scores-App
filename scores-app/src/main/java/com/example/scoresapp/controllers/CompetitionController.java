@@ -1,6 +1,6 @@
 package com.example.scoresapp.controllers;
 
-import com.example.scoresapp.services.FootballCompetitionService;
+import com.example.scoresapp.services.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,10 +11,10 @@ import java.util.NoSuchElementException;
 
 @Controller
 public class CompetitionController {
-  private FootballCompetitionService competitionService;
+  private CompetitionService competitionService;
 
   @Autowired
-  public CompetitionController(FootballCompetitionService competitionService) {
+  public CompetitionController(CompetitionService competitionService) {
     this.competitionService = competitionService;
   }
 

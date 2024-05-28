@@ -17,7 +17,7 @@ public class Competition {
   private List<Game> games;
   @ManyToMany(mappedBy = "competitions")
   private Set<Team> teams;
-  @OneToMany (mappedBy = "competition", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  @OneToMany (mappedBy = "competition", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   private List<TeamStats> table;
 
   public Competition() {
