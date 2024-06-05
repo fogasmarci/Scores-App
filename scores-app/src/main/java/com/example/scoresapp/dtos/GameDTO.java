@@ -2,6 +2,8 @@ package com.example.scoresapp.dtos;
 
 import com.example.scoresapp.models.Game;
 
+import java.time.format.DateTimeFormatter;
+
 public class GameDTO {
   private Long id;
   private String startTime;
@@ -13,7 +15,8 @@ public class GameDTO {
 
   public GameDTO(Game game) {
     id = game.getId();
-    startTime = game.getStartTime().toString();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm");
+    startTime = game.getStartTime().format(formatter);
     competitionName = game.getCompetition().getName();
     homeTeamName = game.getHomeTeamName();
     awayTeamName = game.getAwayTeamName();

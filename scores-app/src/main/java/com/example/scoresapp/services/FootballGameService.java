@@ -43,7 +43,7 @@ public class FootballGameService implements GameService{
     Game game = gameRepository.findById(gameId).orElseThrow(() -> new NoSuchElementException("Game with ID " + gameId + " not found"));
     game.finishGame(scoreDTO);
     List<TeamStats> table = game.getCompetition().getTable();
-    teamStatsService.updateTable(scoreDTO,table);
+    teamStatsService.updateTable(scoreDTO, table);
     gameRepository.save(game);
   }
 
