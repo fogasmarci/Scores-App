@@ -7,16 +7,16 @@ VALUES ('La Liga'),
 INSERT INTO team_stats (team_rank, team_name, games_played, wins, draws, losses, goal_difference, points, competition_id)
 VALUES
     (1, 'Barcelona', 4, 4, 0, 0, 11, 12, 1),  -- 12 points
-    (2, 'Real Sociedad', 2, 1, 1, 0, 0, 4, 1),  -- 4 points
-    (3, 'Sevilla', 3, 0, 2, 1, -2, 2, 1),  -- 2 points
-    (4, 'Valencia', 4, 0, 2, 2, -2, 2, 1),  -- 2 points
-    (5, 'Real Madrid', 4, 1, 0, 3, -4, 3, 1);  -- 3 points
+    (2, 'Real Sociedad', 2, 1, 1, 0, 0, 4, 1), -- 4 points
+    (3, 'Real Madrid', 4, 1, 0, 3, -4, 3, 1), -- 3 points
+    (4, 'Sevilla', 3, 0, 2, 1, -2, 2, 1),  -- 2 points
+    (5, 'Valencia', 4, 0, 2, 2, -2, 2, 1);  -- 2 points
 
 -- Premier League (competition_id = 2)
 INSERT INTO team_stats (team_rank, team_name, games_played, wins, draws, losses, goal_difference, points, competition_id)
 VALUES
     (1, 'Manchester City', 1, 1, 0, 0, 2, 3, 2),  -- 3 points
-    (2, 'Liverpool', 2, 1, 0, 1, 0, 3, 3),  -- 3 points
+    (2, 'Liverpool', 2, 1, 0, 1, 0, 3, 2),  -- 3 points
     (3, 'Manchester United', 2, 0, 0, 2, -6, 0, 2);  -- 0 points
 
 -- Champions League (competition_id = 3)

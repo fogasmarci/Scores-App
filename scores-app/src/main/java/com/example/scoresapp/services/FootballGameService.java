@@ -10,9 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +29,12 @@ public class FootballGameService implements GameService{
     this.teamRepository = teamRepository;
     this.teamGameRepository = teamGameRepository;
     this.teamStatsService = teamStatsService;
+  }
+
+  @Override
+  public GameDTO findGameById(Long gameId) {
+    Game game = gameRepository.findById(gameId).orElseThrow(() -> new NoSuchElementException("Game with ID " + gameId + " not found"));
+    return new GameDTO(game);
   }
 
   @Override
@@ -54,17 +58,11 @@ public class FootballGameService implements GameService{
   }
 
   @Override
-  public GameDTOList listAllGames() {
+  public GamesGroupedByCompetitionDTO listAllGames() {
     List<Game> games = gameRepository.findAll();
-      return new GameDTOList(mapGamestoGameDTO(games));
+    List<GameDTO> gamesDTO = mapGamestoGameDTO(games);
+    return new GamesGroupedByCompetitionDTO(groupGamesByCompetition(gamesDTO));
     }
-
-  @Override
-  public GameDTO findGameById(Long gameId) {
-    Game game = gameRepository.findById(gameId).orElseThrow(() -> new NoSuchElementException("Game with ID " + gameId + " not found"));
-    return new GameDTO(game);
-  }
-
 
   private void createTeamGame(Game game, String homeTeamName, String awayTeamName){
     Team homeTeam = teamRepository.findByName(homeTeamName)
@@ -98,9 +96,33 @@ public class FootballGameService implements GameService{
   private List<GameDTO> mapGamestoGameDTO(List<Game> games){
     List<GameDTO> gamesDTO = games.stream()
             .map(game -> new GameDTO(game))
+            .sorted(Comparator.comparing(g -> g.getCompetitionName()))
             .collect(Collectors.toList());
     return gamesDTO;
   }
+
+  private HashMap<String, List<GameDTO>> groupGamesByCompetition (List<GameDTO> games){
+    HashMap<String, List<GameDTO>> groupedGames = new HashMap<>();
+
+    for (GameDTO game : games) {
+      String competitionName = game.getCompetitionName();
+      List<GameDTO> gameList = groupedGames.computeIfAbsent(competitionName, k -> new ArrayList<>());
+      gameList.add(game);
+    }
+
+    return groupedGames;
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 

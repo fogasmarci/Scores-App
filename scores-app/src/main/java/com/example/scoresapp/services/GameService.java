@@ -2,11 +2,9 @@ package com.example.scoresapp.services;
 
 import com.example.scoresapp.dtos.*;
 
-import java.util.List;
-
 public interface GameService {
 
-  public GameDTOList listAllGames();
+  public GamesGroupedByCompetitionDTO listAllGames();
 
   public GameDTO findGameById(Long id);
 

@@ -4,28 +4,41 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/css/main.css">
     <title>Welcome to Scores</title>
-    <script src="/js/main.js" defer></script>
+    <script src="/js/CustomUrl.js" defer></script>
+    <script src="/js/Search.js" defer></script>
 </head>
 <body>
-<h1>Games</h1>
 <div>
-    <table>
-        <tbody id="gamesTableData">
-        <tr th:each="game : ${games.gameDTO}" th:data-game-id="${game.id}">
-            <td th:text="${game.competitionName}"></td>
-            <td th:text="${game.startTime}"></td>
-            <td>
-                <div th:text="${game.homeTeamName}"></div>
-                <div th:text="${game.awayTeamName}"></div>
-            </td>
-            <td>
-                <div>
-                    <div th:text="${game.homeTeamScore}"></div>
-                    <div th:text="${game.awayTeamScore}"></div>
-                </div>
-            </td>
-        </tr>
-        </tbody>
+    <div id="search-window" class="header__button">
+        <svg id="search-icon">
+            <use xlink:href="../../../assets/search.svg#new-icon"></use>
+        </svg>
+    </div>
+    <form id="search-form">
+        <input type="text" name="search_term" placeholder="Search..." required>
+        <button type="submit">Search</button>
+    </form>
+
+    <table id="gamesTableData" th:each="entry : ${gamesGroupedByCompetition.gamesGroupedByCompetition}">
+            <tr th:custom-url="|competition/${entry.key}|">
+                <th colspan="4">
+                    <h1 th:text="${entry.key}"></h1>
+                </th>
+            </tr>
+
+            <tr th:each="game : ${entry.value}" th:custom-url="|game/${game.id}|">
+                <td th:text="${game.startTime}"></td>
+                <td>
+                    <div th:text="${game.homeTeamName}"></div>
+                    <div th:text="${game.awayTeamName}"></div>
+                </td>
+                <td>
+                    <div>
+                        <div th:text="${game.homeTeamScore}"></div>
+                        <div th:text="${game.awayTeamScore}"></div>
+                    </div>
+                </td>
+            </tr>
     </table>
 
 </div>

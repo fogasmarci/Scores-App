@@ -13,7 +13,7 @@ public class Competition {
   @Column(name = "competition_id")
   private Long id;
   private String name;
-  @OneToMany (mappedBy = "competition", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+  @OneToMany (mappedBy = "competition", cascade = {CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
   private List<Game> games;
   @ManyToMany(mappedBy = "competitions")
   private Set<Team> teams;

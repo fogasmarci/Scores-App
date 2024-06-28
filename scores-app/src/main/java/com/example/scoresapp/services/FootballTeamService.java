@@ -28,6 +28,12 @@ public class FootballTeamService implements TeamService {
     this.teamGameRepository = teamGameRepository;
   }
 
+  public Boolean checkIfTeamExists(String teamName) {
+    teamRepository.findByName(teamName)
+            .orElseThrow(() -> new NoSuchElementException(teamName));
+    return null;
+  }
+
   @Override
   public List<GameDTO> listGames(String teamName) {
     Team team = teamRepository.findByName(teamName).orElseThrow(()

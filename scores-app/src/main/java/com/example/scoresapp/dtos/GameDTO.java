@@ -1,6 +1,7 @@
 package com.example.scoresapp.dtos;
 
 import com.example.scoresapp.models.Game;
+import com.example.scoresapp.models.GameStatus;
 
 import java.time.format.DateTimeFormatter;
 
@@ -12,6 +13,7 @@ public class GameDTO {
   private Integer homeTeamScore;
   private String awayTeamName;
   private Integer awayTeamScore;
+  private GameStatus gameStatus;
 
   public GameDTO(Game game) {
     id = game.getId();
@@ -22,6 +24,7 @@ public class GameDTO {
     awayTeamName = game.getAwayTeamName();
     homeTeamScore = game.getHomeTeamScore();
     awayTeamScore = game.getAwayTeamScore();
+    this.gameStatus = game.getGameStatus();
   }
 
   public String getStartTime() {
@@ -78,5 +81,9 @@ public class GameDTO {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public GameStatus getGameStatus() {
+    return gameStatus;
   }
 }

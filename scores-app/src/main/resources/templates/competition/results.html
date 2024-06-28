@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Results</title>
+    <script src="/js/CustomUrl.js" defer></script>
+</head>
+<body>
+    <div class="tabs">
+        <div class="tabs__group">
+            <div class="tab results">
+                <a th:href="@{/competition/{competitionName}/results(competitionName=${competitionName})}" id="li1">Result</a>
+            </div>
+            <div class="tab games">
+                <a th:href="@{/competition/{competitionName}/games(competitionName=${competitionName})}" id="li2">Games</a>
+            </div>
+            <div class="tab table">
+                <a th:href="@{/competition/{competitionName}/table(competitionName=${competitionName})}" id="li3">Table</a>
+            </div>
+        </div>
+    </div>
+    <table id="gamesTableData" >
+        <tr th:each="game : ${results.games}" th:custom-url="|game/${game.id}|">
+            <td th:text="${game.startTime}"></td>
+            <td>
+                <div th:text="${game.homeTeamName}"></div>
+                <div th:text="${game.awayTeamName}"></div>
+            </td>
+            <td>
+                <div>
+                    <div th:text="${game.homeTeamScore}"></div>
+                    <div th:text="${game.awayTeamScore}"></div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+</body>
+</html>

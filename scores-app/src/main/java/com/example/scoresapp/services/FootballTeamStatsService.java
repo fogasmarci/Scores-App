@@ -1,6 +1,7 @@
 package com.example.scoresapp.services;
 
 import com.example.scoresapp.dtos.ScoreDTO;
+import com.example.scoresapp.dtos.TableDataDTO;
 import com.example.scoresapp.models.TeamStats;
 import com.example.scoresapp.repositories.TeamStatsRepository;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,12 @@ public class FootballTeamStatsService implements TeamStatsService {
         }
 
         setTableRank(table);
+    }
+
+    @Override
+    public TableDataDTO showTableData(String competitionName) {
+
+        return null;
     }
 
     private void setTableRank(List<TeamStats> table){

@@ -19,8 +19,8 @@ public class GameController {
 
     @GetMapping("/")
     public String displayAllGames(Model model) {
-        model.addAttribute("games", gameService.listAllGames());
-        return "home";
+        model.addAttribute("gamesGroupedByCompetition", gameService.listAllGames());
+            return "home";
     }
 
     @GetMapping("/game/{gameId}")
