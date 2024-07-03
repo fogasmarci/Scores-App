@@ -1,7 +1,9 @@
 package com.example.scoresapp.controllers;
 
+import com.example.scoresapp.dtos.GameDTO;
 import com.example.scoresapp.dtos.NewGameDTO;
 import com.example.scoresapp.dtos.ScoreDTO;
+import com.example.scoresapp.services.ApiService;
 import com.example.scoresapp.services.CompetitionService;
 import com.example.scoresapp.services.GameService;
 import com.example.scoresapp.services.TeamService;
@@ -16,12 +18,14 @@ import java.util.NoSuchElementException;
   private final GameService gameService;
   private final CompetitionService competitionService;
   private final TeamService teamService;
+  private final ApiService apiService;
 
   @Autowired
-  public GameRestController(GameService gameService, CompetitionService competitionService, TeamService teamService) {
+  public GameRestController(GameService gameService, CompetitionService competitionService, TeamService teamService, ApiService apiService) {
     this.gameService = gameService;
     this.competitionService = competitionService;
     this.teamService = teamService;
+    this.apiService = apiService;
   }
 
   @PostMapping("/api/games")
@@ -52,6 +56,15 @@ import java.util.NoSuchElementException;
       return ResponseEntity.status(200).build();
     } catch (NoSuchElementException e){
       return ResponseEntity.status(400).body(e.getMessage());
+    }
+  }
+
+  @PatchMapping("/api/game/result")
+  public ResponseEntity<?> getGameResult(@RequestParam String h2h, @RequestParam String date) {
+    try {
+      return ResponseEntity.status(200).body(apiService.getGameResult(h2h, date));
+    } catch (Exception e) {
+        return ResponseEntity.status(500).body("Error fetching competitions: " + e.getMessage());
     }
   }
 }

@@ -1,6 +1,5 @@
 package com.example.scoresapp.controllers;
 
-import com.example.scoresapp.dtos.NewGameDTO;
 import com.example.scoresapp.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,11 +8,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.NoSuchElementException;
 
 @RestController
-public class TeamController {
+public class TeamRestController {
   private TeamService teamService;
 
   @Autowired
-  public TeamController(TeamService teamService){
+  public TeamRestController(TeamService teamService){
     this.teamService = teamService;
   }
 

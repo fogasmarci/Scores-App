@@ -21,4 +21,7 @@ public interface GameRepository extends JpaRepository<Game, Long> {
   //nem is kell
   /*@Query(value = "SELECT * FROM games WHERE competition_id = :id AND away_team_id = :2", nativeQuery = true)
   Optional<Game> findByCompetitionIdAndGameStatus(Long id, GameStatus played);*/
+
+  @Query(value = "SELECT * FROM games WHERE start_time = :startTime AND home_team = :homeTeam AND away_team = :awayTeam", nativeQuery = true)
+  Optional<Game> findByStartTimeAndTeamNames(String startTime, String homeTeam, String awayTeam);
 }

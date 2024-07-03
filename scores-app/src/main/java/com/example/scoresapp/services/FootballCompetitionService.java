@@ -75,6 +75,20 @@ public class FootballCompetitionService implements CompetitionService {
     return new GamesDTO(playedGames);
   }
 
+  @Override
+  public GamesDTO showGames(String competitionName) {
+    Competition competition = competitionRepository.findByName(competitionName).orElseThrow(()
+            -> new NoSuchElementException("Team name not found"));
+
+    List<Game> games = competition.getGames();
+    List<GameDTO> gamesDTO = mapGamesToGameDTO(games);
+    List<GameDTO> playedGames = gamesDTO.stream()
+            .filter(game -> game.getGameStatus() == GameStatus.Not_started)
+            .toList();
+
+    return new GamesDTO(playedGames);
+  }
+
   private List<GameDTO> mapGamesToGameDTO(List<Game> games){
   // Team service has a VERY similar method, maybe I should organize them in a separate Class.
     List<GameDTO> gameDTOList = games.stream()

@@ -1,0 +1,32 @@
+.league-table {
+    width: 40%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.league-table thead tr:nth-child(2) {
+    background-color: #cce5ff;
+    border-bottom: 2px solid #eee;
+}
+
+.league-table th {
+    font-weight: bold;
+}
+
+.league-table th, .league-table td {
+    padding: 8px 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.league-table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+.league-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.league-table th:nth-child(2), td:nth-child(2) {
+    text-align: left;
+}

@@ -52,7 +52,7 @@ VALUES (1, 1),
 SET GLOBAL time_zone = '+03:00';
 INSERT INTO games (name, home_team, home_team_score, away_team, away_team_score, round, game_status, start_time, competition_id)
 VALUES ('Barcelona vs Real Madrid', 'Barcelona', 5, 'Real Madrid', 1, 1, 2, '2024-04-01 18:30', 1),
-       ('Barcelona vs Valencia', 'Barcelona',  NULL, 'Valencia', NULL, 2, 0, '2024-05-11 18:00', 1),
+       ('Barcelona vs Valencia', 'Barcelona',  NULL, 'Valencia', NULL, 2, 0, '2024-04-29 17:00', 1),
        ('Real Madrid vs Valencia', 'Real Madrid', NULL, 'Valencia', NULL, 3, 0, '2024-05-17 20:00', 1),
        ('Barcelona vs Liverpool', 'Barcelona', 3, 'Liverpool', 1, 1, 2, '2024-05-05 21:00', 3),
        ('Real Sociedad vs Sevilla', 'Real Sociedad', 2, 'Sevilla', 2, 1, 2, '2024-04-10 18:30', 1),

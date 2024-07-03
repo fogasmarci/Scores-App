@@ -1,0 +1,41 @@
+.tabs {
+    width: 20%;
+    margin: 0 auto 50px auto;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.tabs__group {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.tab {
+    flex: 1;
+    text-align: center;
+    padding: 12px 0;
+}
+
+.tab a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: 500;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover effect */
+.tab a:hover {
+    background-color: #e9ecef;
+    color: #0056b3;
+}
+
+/* Active state styling */
+.tab a.active {
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 4px 4px 0 0;
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}

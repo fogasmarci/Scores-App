@@ -11,5 +11,9 @@ public interface CompetitionService {
 
   GamesDTO showResults(String competitionName);
 
+  GamesDTO showGames(String competitionName);
+
   Boolean checkIfCompetitionExists(String competitionName);
+
+
 }

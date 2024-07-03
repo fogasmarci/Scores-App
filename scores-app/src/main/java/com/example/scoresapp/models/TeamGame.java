@@ -13,7 +13,6 @@ public class TeamGame {
   private Team homeTeam;
   @OneToOne
   private Team awayTeam;
-
   @OneToOne
   private Game game;
 

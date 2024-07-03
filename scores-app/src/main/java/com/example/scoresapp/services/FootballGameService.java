@@ -52,6 +52,14 @@ public class FootballGameService implements GameService{
   }
 
   @Override
+  public void playGame(Game game, ScoreDTO scoreDTO){
+    game.finishGame(scoreDTO);
+    List<TeamStats> table = game.getCompetition().getTable();
+    teamStatsService.updateTable(scoreDTO, table);
+    gameRepository.save(game);
+  }
+
+  @Override
   public void listAllGamesForGivenTeam(TeamNameDTO teamNameDTO) {
     Team team = teamRepository.findByName(teamNameDTO.teamName())
         .orElseThrow(() -> new NoSuchElementException("Home Team with name " + teamNameDTO.teamName() + " not found"));
@@ -63,6 +71,13 @@ public class FootballGameService implements GameService{
     List<GameDTO> gamesDTO = mapGamestoGameDTO(games);
     return new GamesGroupedByCompetitionDTO(groupGamesByCompetition(gamesDTO));
     }
+
+  //@Override
+  public void matchApiGamewithDatabaseGame(String HomeTeamName, String AwayTeamName, String Date) {
+    Game game = gameRepository.findById(1L).orElseThrow(null);
+   /* List<GameDTO> gamesDTO = mapGamestoGameDTO(games);*/
+
+  }
 
   private void createTeamGame(Game game, String homeTeamName, String awayTeamName){
     Team homeTeam = teamRepository.findByName(homeTeamName)
