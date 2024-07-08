@@ -14,8 +14,8 @@ public class TeamStats {
   private Competition competition;
   @Column(name = "team_rank")
   private int teamRank;
-  @Column(name = "team_name")
-  private String teamName;
+  @ManyToOne()
+  private Team team;
   @Column(name = "games_played")
   private int gamesPlayed;
   private int wins;
@@ -29,9 +29,9 @@ public class TeamStats {
 
   }
 
-  public TeamStats(String teamName) {
+  public TeamStats(Team team) {
     teamRank = 1;
-    this.teamName = teamName;
+    this.team = team;
     gamesPlayed = 0;
     wins = 0;
     draws = 0;
@@ -56,11 +56,11 @@ public class TeamStats {
     this.teamRank = rank;
   }
 
-  public String getTeamName() {
-    return teamName;
+  public Team getTeam() {
+    return team;
   }
 
-  public void setTeamName(String teamName) {
+  public void setTeam(String teamName) {
     teamName = teamName;
   }
 

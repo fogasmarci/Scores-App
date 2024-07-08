@@ -6,6 +6,7 @@ public class TableDataDTO {
     private String competitionName;
     private int teamRank;
     private String teamName;
+    private Long apiID;
     private int gamesPlayed;
     private int wins;
     private int draws;
@@ -16,7 +17,8 @@ public class TableDataDTO {
     public TableDataDTO(TeamStats teamStat) {
         competitionName = teamStat.getCompetition().getName();
         teamRank = teamStat.getTeamRank();
-        teamName = teamStat.getTeamName();
+        teamName = teamStat.getTeam().getName();
+        apiID = teamStat.getTeam().getApiId();
         gamesPlayed = teamStat.getGamesPlayed();
         wins = teamStat.getWins();
         draws = teamStat.getDraws();
@@ -59,5 +61,9 @@ public class TableDataDTO {
 
     public int getPoints() {
         return points;
+    }
+
+    public Long getApiID() {
+        return apiID;
     }
 }

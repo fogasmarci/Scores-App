@@ -12,6 +12,7 @@ public class Team {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  private Long apiId;
   private String name;
   @ManyToMany
   @JoinTable (
@@ -50,7 +51,6 @@ public class Team {
     this.name = name;
   }
 
-
   public Set<Player> getPlayers() {
     return players;
   }
@@ -61,5 +61,13 @@ public class Team {
 
   public Long getId() {
     return id;
+  }
+
+  public Long getApiId() {
+    return apiId;
+  }
+
+  public void setApiId(Long apiId) {
+    this.apiId = apiId;
   }
 }

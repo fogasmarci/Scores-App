@@ -22,11 +22,11 @@ public class FootballTeamStatsService implements TeamStatsService {
     @Override
     public void updateTable(ScoreDTO scoreDTO, List<TeamStats> table) {
         Optional<TeamStats> homeTeam = table.stream()
-                .filter(team -> team.getTeamName().equals(scoreDTO.homeTeamName()))
+                .filter(team -> team.getTeam().equals(scoreDTO.homeTeamName()))
                 .findFirst();
 
         Optional<TeamStats> awayTeam = table.stream()
-                .filter(team -> team.getTeamName().equals(scoreDTO.awayTeamName()))
+                .filter(team -> team.getTeam().equals(scoreDTO.awayTeamName()))
                 .findFirst();
 
         if (homeTeam.isEmpty() || awayTeam.isEmpty()) {

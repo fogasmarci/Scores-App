@@ -40,6 +40,9 @@
     <tbody>
         <tr th:each="teamStat : ${tableData.tableDTOList}">
             <td th:text="${teamStat.getTeamRank()}"></td>
+            <td>
+                <img th:src="'https://media.api-sports.io/football/teams/' + ${teamStat.getApiID()} + '.png'" alt="Team Logo">
+            </td>
             <td th:text="${teamStat.getTeamName()}"></td>
             <td th:text="${teamStat.getWins()}"></td>
             <td th:text="${teamStat.getDraws()}"></td>
