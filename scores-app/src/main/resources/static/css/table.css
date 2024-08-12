@@ -30,3 +30,16 @@
 .league-table th:nth-child(2), td:nth-child(2) {
     text-align: left;
 }
+
+.league-table img {
+    width: 30px;
+}
+
+.logoWithCompetitionOrTeam {
+   display: flex;
+    /*     align-items: center;*/
+}
+
+.logoWithCompetitionOrTeam span {
+    margin-left: 10px;
+}

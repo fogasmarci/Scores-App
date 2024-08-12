@@ -47,7 +47,7 @@ VALUES (1, 1),
        (1, 3),
        (6, 3);
 
-SET GLOBAL time_zone = '+03:00';
+SET GLOBAL time_zone = '+00:00';
 INSERT INTO games (name, home_team, home_team_score, away_team, away_team_score, round, game_status, start_time, competition_id)
 VALUES ('Barcelona vs Real Madrid', 'Barcelona', 5, 'Real Madrid', 1, 1, 2, '2024-04-01 18:30', 1),
        ('Barcelona vs Valencia', 'Barcelona',  NULL, 'Valencia', NULL, 2, 0, '2024-04-29 17:00', 1),
